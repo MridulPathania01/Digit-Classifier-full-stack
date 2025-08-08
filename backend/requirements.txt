@@ -3,3 +3,4 @@ flask-cors
 tensorflow
 numpy
 h5py
+gunicorn
