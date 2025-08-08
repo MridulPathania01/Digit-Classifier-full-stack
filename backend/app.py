@@ -2,8 +2,9 @@ from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 import numpy as np
 import cv2
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 model = load_model("digit_cnn.h5")
 
 @app.route("/")
