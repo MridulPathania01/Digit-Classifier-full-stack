@@ -4,3 +4,4 @@ tensorflow
 numpy
 h5py
 gunicorn
+opencv-python
