@@ -30,25 +30,26 @@ document.getElementById("clearBtn").addEventListener("click", () => {
 
 // Predict button
 document.getElementById("predictBtn").addEventListener("click", async () => {
-    let imgData = ctx.getImageData(0, 0, 280, 280);
-
-    // Create an off-screen canvas to resize
     let tmpCanvas = document.createElement("canvas");
     tmpCanvas.width = 28;
     tmpCanvas.height = 28;
     let tmpCtx = tmpCanvas.getContext("2d");
+
+    // Resize original drawing to 28x28
     tmpCtx.drawImage(canvas, 0, 0, 28, 28);
 
-    // Convert to grayscale
+    // Convert to grayscale and build 2D array
     let imgArray = [];
     let pixels = tmpCtx.getImageData(0, 0, 28, 28).data;
-    for (let i = 0; i < pixels.length; i += 4) {
-        let avg = (pixels[i] + pixels[i+1] + pixels[i+2]) / 3;
-        imgArray.push(avg);
+    for (let y = 0; y < 28; y++) {
+        let row = [];
+        for (let x = 0; x < 28; x++) {
+            let idx = (y * 28 + x) * 4;
+            let avg = (pixels[idx] + pixels[idx + 1] + pixels[idx + 2]) / 3;
+            row.push(Math.round(avg)); // integer 0–255
+        }
+        imgArray.push(row);
     }
-
-    // Normalize pixel values
-    imgArray = imgArray.map(v => v / 255.0);
 
     // Send to backend
     try {
