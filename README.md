@@ -105,13 +105,6 @@ model = Sequential([
 
 ---
 
-## **8. Example Output**
-**User draws:** `3`  
-**Prediction:** `3` (Confidence: 99.2%)  
-![Sample Output](docs/sample_output.png)
-
----
-
 ## **9. Design Decisions**
 - **CNN over MLP:** Better for image pattern recognition.  
 - **Flask API:** Lightweight and fast for model serving.  
